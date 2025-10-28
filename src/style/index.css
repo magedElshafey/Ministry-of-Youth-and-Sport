@@ -1,0 +1,143 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+:root {
+    --orangeColor: #fe5621;
+    --blueColor: #0d47a1;
+    --textColor: #656565;
+    --grayColor: #f6f6f6;
+    --grayBg: #212524;
+}
+
+body {
+    overflow-x: hidden;
+    text-transform: capitalize;
+    font-family: "Cairo", sans-serif;
+    text-transform: capitalize !important;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* default classes */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: bold;
+}
+
+h1 {
+    font-size: 2.125rem;
+}
+
+h2 {
+    font-size: 1.875rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+}
+
+h4 {
+    font-size: 1.25rem;
+}
+
+h5 {
+    font-size: 1.125rem;
+}
+
+h6 {
+    font-size: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+
+}
+
+@media screen and (max-width: 480px) {
+    h2 {
+        font-size: 1.25rem;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    h3 {
+        font-size: 1.125rem;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    h4 {
+        font-size: 1.125rem;
+    }
+
+}
+
+@media screen and (max-width: 320px) {
+    h5 {
+        font-size: 1rem;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    h6 {
+        font-size: 0.875rem;
+    }
+}
+
+a.active {
+    font-weight: bold;
+    color: var(--orangeColor);
+}
+
+/* .containerr {
+    @apply w-full max-w-[1650px] mx-auto px-4;
+} */
+.containerr {
+    @apply w-full mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+@screen sm {
+    .containerr {
+        max-width: 540px;
+    }
+}
+
+@screen md {
+    .containerr {
+        max-width: 720px;
+    }
+}
+
+@screen lg {
+    .containerr {
+        max-width: 960px;
+    }
+}
+
+@screen xl {
+    .containerr {
+        max-width: 1140px;
+    }
+}
+
+@screen 2xl {
+    .containerr {
+        max-width: 1320px;
+    }
+}
