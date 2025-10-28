@@ -100,14 +100,9 @@ h6 {
     }
 }
 
-a.active {
-    font-weight: bold;
-    color: var(--orangeColor);
-}
 
-/* .containerr {
-    @apply w-full max-w-[1650px] mx-auto px-4;
-} */
+
+
 .containerr {
     @apply w-full mx-auto px-4 sm:px-6 lg:px-8;
 }

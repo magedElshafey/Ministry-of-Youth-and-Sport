@@ -2,6 +2,8 @@ import { IconType } from "react-icons";
 import Ballpit from "./Ballpit";
 import { MdDateRange, MdOutlineLocationOn } from "react-icons/md";
 import { useTranslation } from "react-i18next";
+import useGetSettings from "../../components/multi-step-form/api/useGetSettings";
+import { formatDate } from "../../utils/formatDate";
 interface HeroProps {
   title: string;
   description: string;
@@ -9,22 +11,8 @@ interface HeroProps {
 }
 const Hero: React.FC<HeroProps> = ({ Icon, title, description }) => {
   const { t } = useTranslation();
-  const data: {
-    Icon: IconType;
-    title: string;
-    description: string;
-  }[] = [
-    {
-      Icon: MdDateRange,
-      title: "date & time",
-      description: "lorem lorem lorem lorem",
-    },
-    {
-      Icon: MdOutlineLocationOn,
-      title: "location",
-      description: "lorem lorem lorem lorem",
-    },
-  ];
+  const queryResult = useGetSettings();
+  console.log("query from settings", queryResult?.data);
   return (
     <div
       style={{
@@ -51,19 +39,28 @@ const Hero: React.FC<HeroProps> = ({ Icon, title, description }) => {
           {description}
         </p>
         <div className="mt-6 w-full md:w-1/2">
-          {data?.length > 0 && (
+          {queryResult && queryResult?.data && (
             <div className="flex flex-col md:flex-row items-center justify-between gap-5">
-              {data?.map((item, index) => (
-                <div key={index} className="flex flex-col gap-3">
-                  <div className="flex items-center gap-2 mb-3">
-                    <item.Icon size={20} className="text-white" />
-                    <p className="font-semibold text-base md:text-md lg:text-lg xl:text-xl 2xl:text-2xl">
-                      {t(item?.title)}
-                    </p>
-                  </div>
-                  <p className="text-gray-200">{item?.description}</p>
+              <div className="flex flex-col gap-2">
+                <div className="flex items-center gap-2">
+                  <MdDateRange size={20} className="text-white" />
+                  <p className="font-semibold text-base md:text-md lg:text-lg xl:text-xl 2xl:text-2xl">
+                    {t("date & time")}
+                  </p>
                 </div>
-              ))}
+                <p className="text-gray-200">
+                  {formatDate(queryResult?.data?.launch_date)}
+                </p>
+              </div>
+              <div className="flex flex-col gap-2">
+                <div className="flex items-center gap-2">
+                  <MdOutlineLocationOn size={20} className="text-white" />
+                  <p className="font-semibold text-base md:text-md lg:text-lg xl:text-xl 2xl:text-2xl">
+                    {t("location")}
+                  </p>
+                </div>
+                <p className="text-gray-200">{queryResult?.data?.location}</p>
+              </div>
             </div>
           )}
         </div>
