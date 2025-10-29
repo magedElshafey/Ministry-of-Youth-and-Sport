@@ -18,12 +18,17 @@ export function Step1() {
   return (
     <div className="space-y-6">
       <MainInput
-        label="full name (Arabic / English)"
-        placeholder="enter your name"
-        {...register("fullName")}
-        error={errors.fullName?.message}
+        label="full name (Arabic)"
+        placeholder="enter your name in Arabic"
+        {...register("fullNameArabic")}
+        error={errors.fullNameArabic?.message}
       />
-
+      <MainInput
+        label="full name (English)"
+        placeholder="enter your name in English"
+        {...register("fullNameEnglish")}
+        error={errors.fullNameEnglish?.message}
+      />
       <MainInput
         label="email"
         placeholder="enter your email"

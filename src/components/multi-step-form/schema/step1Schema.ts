@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const step1Schema = z.object({
-  fullName: z
+  fullNameArabic: z
     .string()
     .min(2, "validation.step1.fullName.min")
     .max(100, "validation.step1.fullName.max"),

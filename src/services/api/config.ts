@@ -5,4 +5,5 @@ export const apiRoutes = {
   cities: "cities",
   pages: "form_pages",
   flights: "trips",
+  setting: "setting",
 };
