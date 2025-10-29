@@ -1,21 +1,20 @@
-import { UseFormReturn } from "react-hook-form";
-import { Step1Data } from "../schema/step1Schema";
+import { useFormContext } from "react-hook-form";
+import { CombinedFormData } from "../schema/combinedSchema";
 import MainInput from "../../common/inputs/MainInput";
 import MainSelect from "../../common/inputs/MainSelect";
 import useGetGenders from "../api/useGetGenders";
 
-interface Step1Props {
-  methods: UseFormReturn<Step1Data>;
-}
-
-export function Step1({ methods }: Step1Props) {
+export function Step1() {
   const {
     register,
     setValue,
     formState: { errors },
     watch,
-  } = methods;
+    setError,
+  } = useFormContext<CombinedFormData>();
+
   const { data, isFetching } = useGetGenders();
+
   return (
     <div className="space-y-6">
       <MainInput
@@ -66,6 +65,7 @@ export function Step1({ methods }: Step1Props) {
         value={watch("gender") ?? null}
         onChange={(id) => {
           if (id !== null) setValue("gender", id);
+          if (id !== null) setError("gender", {});
         }}
         error={errors.gender?.message}
         options={data}

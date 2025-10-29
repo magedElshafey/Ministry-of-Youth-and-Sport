@@ -3,5 +3,71 @@
   "english": "english",
   "arabic": "arabic",
   "date & time": "date & time",
-  "location": "location"
+  "location": "location",
+  "step2": {
+    "from": "From",
+    "to": "To",
+    "select_city": "Select a city",
+    "date": "Date",
+    "flight_number": "Flight number",
+    "departure_time": "Departure time",
+    "has_stops": "Has stops",
+    "stop_city": "Stop city",
+    "stop_time": "Stop time"
+  },
+  "submit": "Submit",
+  "next": "Next",
+  "back": "Back",
+  "true": "Yes",
+  "false": "No",
+  "validation": {
+    "step1": {
+      "fullName": {
+        "min": "Name must be at least 2 characters",
+        "max": "Name is too long"
+      },
+      "email": {
+        "invalid": "Invalid email address"
+      },
+      "mobile": {
+        "invalid": "Invalid phone number (e.g., 0512345678 or 966512345678)"
+      },
+      "title": {
+        "required": "Title is required"
+      },
+      "idNumber": {
+        "invalid": "National ID must be 14 digits"
+      },
+      "idNumberDate": {
+        "required": "Please select a date"
+      },
+      "gender": {
+        "required": "Please select gender"
+      }
+    },
+    "step2": {
+      "from": {
+        "required": "Please select a city"
+      },
+      "date": {
+        "required": "Please select a date"
+      }
+    },
+    "step3": {
+      "from": {
+        "required": "Please select a city"
+      },
+      "date": {
+        "required": "Please select a date"
+      }
+    },
+    "step4": {
+      "arrivingDate": {
+        "required": "Please select a date"
+      },
+      "leavingDate": {
+        "required": "Please select a date"
+      }
+    }
+  }
 }

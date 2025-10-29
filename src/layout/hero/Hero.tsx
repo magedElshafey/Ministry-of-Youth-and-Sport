@@ -1,14 +1,17 @@
 import { IconType } from "react-icons";
-import Ballpit from "./Ballpit";
 import { MdDateRange, MdOutlineLocationOn } from "react-icons/md";
 import { useTranslation } from "react-i18next";
-interface HeroProps {
+
+interface Props {
   title: string;
   description: string;
-  Icon: IconType;
+  icon: string;
+  image: string
 }
-const Hero: React.FC<HeroProps> = ({ Icon, title, description }) => {
+
+const Hero: React.FC<Props> = ({ title, description, icon, image }) => {
   const { t } = useTranslation();
+
   const data: {
     Icon: IconType;
     title: string;
@@ -35,17 +38,11 @@ const Hero: React.FC<HeroProps> = ({ Icon, title, description }) => {
         width: "100%",
         backgroundColor: "#207566",
       }}
+      className="rounded-b-3xl"
     >
-      <Ballpit
-        colors={["#009e3e", "#0083c6", "#f4c40e", "#df0826"]}
-        count={100}
-        gravity={0.7}
-        friction={0.8}
-        wallBounce={0.95}
-        followCursor={true}
-      />
+      <img className="absolute top-0 start-0 h-full w-full object-center object-cover" src={image} />
       <div className="absolute inset-0 flex flex-col  justify-center z-10 text-white containerr">
-        <Icon size={50} className="mb-2" />
+        <img src={icon} width={80} className="mb-4" />
         <h1 className="text-4xl font-bold mb-3">{title}</h1>
         <p className="text-gray-400 w-full md:w-1/2  leading-relaxed pb-6  border-b border-b-gray-400">
           {description}
@@ -69,8 +66,7 @@ const Hero: React.FC<HeroProps> = ({ Icon, title, description }) => {
         </div>
       </div>
 
-      {/* طبقة خفيفة شفافة لو حبيت تغمق الخلفية */}
-      <div className="absolute inset-0 bg-black/40 z-5"></div>
+      <div className="absolute inset-0 bg-orangeColor/75 z-5"></div>
     </div>
   );
 };

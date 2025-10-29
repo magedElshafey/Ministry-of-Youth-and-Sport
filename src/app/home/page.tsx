@@ -1,43 +1,33 @@
-import { useState } from "react";
-import MultiStepForm from "../../components/multi-step-form/components";
-import MainLayout from "../../layout/MainLayout";
-import { FaRegUser, FaCar } from "react-icons/fa";
-import { MdFlightLand } from "react-icons/md";
-import { PiStarHalfLight } from "react-icons/pi";
+import {MainLayoutWithContext as MainLayout} from "../../layout/MainLayout";
+import useGetPages from "../../components/multi-step-form/api/useGetPages";
+import { useNavigate } from "react-router-dom";
+import { CombinedFormData } from "../../components/multi-step-form/schema/combinedSchema";
+import { MultiStepFormProvider } from "../../store/MultiStepFormProvider";
+import { formSteps } from "../../components/multi-step-form/config/steps.config";
+import FormContent from "../../components/multi-step-form/components/SteppedForm";
 
 export default function HomePage() {
-  const [currentStep, setCurrentStep] = useState(0);
+  const pagesQuery = useGetPages();
 
-  const heroContent = [
-    {
-      title: "الخطوة 1: بياناتك الشخصية",
-      description:
-        "محتوى) ويُستخدم في صناعات المطابع ودور النشر. كان لوريم إيبسوم ولايزال المعيار للنص الشكلي منذ القرن الخامس عشر عندما قامت مطبعة مجهولة برص مجموعة من الأحرف بشكل عشوائي أخذتها من نص، لتكوّن كتيّب بمثابة دليل أو مرجع شكلي لهذه الأحرف. خمسة قرون من الزمن لم تقضي على هذا النص، بل انه حتى صار مستخدماً وبشكله الأصلي في الطباعة والتنضيد الإلكتروني. انتشر بشكل كبير في ستينيّات هذا القرن مع إصدار رقائق  (Letraset) البلاستيكية تحوي مقاطع من هذا النص، وعاد لينتشر مرة أخرى مؤخراَ مع ظهور برامج النشر الإلكتروني مثل  (AlPageMaker) والتي حوت أيضاً ",
-      Icon: FaRegUser,
-    },
-    {
-      title: "الخطوة 2: معلومات إضافية",
-      description:
-        "محتوى) ويُستخدم في صناعات المطابع ودور النشر. كان لوريم إيبسوم ولايزال المعيار للنص الشكلي منذ القرن الخامس عشر عندما قامت مطبعة مجهولة برص مجموعة من الأحرف بشكل عشوائي أخذتها من نص، لتكوّن كتيّب بمثابة دليل أو مرجع شكلي لهذه الأحرف. خمسة قرون من الزمن لم تقضي على هذا النص، بل انه حتى صار مستخدماً وبشكله الأصلي في الطباعة والتنضيد الإلكتروني. انتشر بشكل كبير في ستينيّات هذا القرن مع إصدار رقائق  (Letraset) البلاستيكية تحوي مقاطع من هذا النص، وعاد لينتشر مرة أخرى مؤخراَ مع ظهور برامج النشر الإلكتروني مثل  (AlPageMaker) والتي حوت أيضاً ",
-      Icon: PiStarHalfLight,
-    },
-    {
-      title: "الخطوة 3: تأكيد المعلومات",
-      description:
-        "محتوى) ويُستخدم في صناعات المطابع ودور النشر. كان لوريم إيبسوم ولايزال المعيار للنص الشكلي منذ القرن الخامس عشر عندما قامت مطبعة مجهولة برص مجموعة من الأحرف بشكل عشوائي أخذتها من نص، لتكوّن كتيّب بمثابة دليل أو مرجع شكلي لهذه الأحرف. خمسة قرون من الزمن لم تقضي على هذا النص، بل انه حتى صار مستخدماً وبشكله الأصلي في الطباعة والتنضيد الإلكتروني. انتشر بشكل كبير في ستينيّات هذا القرن مع إصدار رقائق  (Letraset) البلاستيكية تحوي مقاطع من هذا النص، وعاد لينتشر مرة أخرى مؤخراَ مع ظهور برامج النشر الإلكتروني مثل  (AlPageMaker) والتي حوت أيضاً ",
-      Icon: MdFlightLand,
-    },
-    {
-      title: "الخطوة 4: تأكيد المعلومات",
-      description:
-        "محتوى) ويُستخدم في صناعات المطابع ودور النشر. كان لوريم إيبسوم ولايزال المعيار للنص الشكلي منذ القرن الخامس عشر عندما قامت مطبعة مجهولة برص مجموعة من الأحرف بشكل عشوائي أخذتها من نص، لتكوّن كتيّب بمثابة دليل أو مرجع شكلي لهذه الأحرف. خمسة قرون من الزمن لم تقضي على هذا النص، بل انه حتى صار مستخدماً وبشكله الأصلي في الطباعة والتنضيد الإلكتروني. انتشر بشكل كبير في ستينيّات هذا القرن مع إصدار رقائق  (Letraset) البلاستيكية تحوي مقاطع من هذا النص، وعاد لينتشر مرة أخرى مؤخراَ مع ظهور برامج النشر الإلكتروني مثل  (AlPageMaker) والتي حوت أيضاً ",
-      Icon: FaCar,
-    },
-  ];
+  const navigate = useNavigate();
+
+  const handleComplete = (data: CombinedFormData) => {
+    console.log(data);
+    navigate('/success');
+  };
+
+  if(pagesQuery.isLoading) return <div>
+    loading...
+  </div>
 
   return (
-    <MainLayout heroData={heroContent[currentStep]}>
-      <MultiStepForm onStepChange={setCurrentStep} />
-    </MainLayout>
+    <MultiStepFormProvider
+      steps={formSteps}
+      onComplete={handleComplete}
+    >
+      <MainLayout>
+        <FormContent />
+      </MainLayout>
+    </MultiStepFormProvider>
   );
 }

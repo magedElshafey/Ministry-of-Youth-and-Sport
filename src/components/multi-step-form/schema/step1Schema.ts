@@ -3,22 +3,22 @@ import { z } from "zod";
 export const step1Schema = z.object({
   fullName: z
     .string()
-    .min(2, "الاسم لازم يكون على الأقل حرفين")
-    .max(100, "الاسم طويل جدًا"),
-  email: z.string().email("البريد الإلكتروني غير صالح"),
+    .min(2, "validation.step1.fullName.min")
+    .max(100, "validation.step1.fullName.max"),
+  email: z.string().email("validation.step1.email.invalid"),
   mobile: z
     .string()
-    .regex(/^01[0-9]{9}$/, "رقم الهاتف غير صالح (مثلاً 01012345678)"),
-  title: z.string().min(2, "الوظيفة مطلوبة"),
-  idNumber: z.string().regex(/^[0-9]{14}$/, "رقم الهوية يجب أن يكون 14 رقمًا"),
-  idNumberDate: z.string().min(1, "برجاء اختيار التاريخ"),
+    .regex(/^(05|9665)[0-9]{8}$/, "validation.step1.mobile.invalid"),
+  title: z.string().min(2, "validation.step1.title.required"),
+  idNumber: z.string().regex(/^[0-9]{14}$/, "validation.step1.idNumber.invalid"),
+  idNumberDate: z.string().min(1, "validation.step1.idNumberDate.required"),
 
   gender: z
     .number({
-      error: "من فضلك اختر النوع",
+      error: "validation.step1.gender.required",
     })
     .refine((val) => val === 1 || val === 2, {
-      message: "من فضلك اختر النوع",
+      message: "validation.step1.gender.required",
     }),
 });
 

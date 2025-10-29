@@ -277,8 +277,7 @@ const MainSelectInner = <T extends OptionType>(props: MainSelectProps<T>) => {
             // note: actual blur handling to forms will be called on select or explicitly if needed
           }}
           className={`transition text-text-gray duration-150  w-full py-3 px-4 flex justify-between gap-3 border border-gray-300 rounded-sm
-bg-white
-            ${disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}
+            ${disabled ? "opacity-50 cursor-not-allowed bg-[#ccc]" : "cursor-pointer bg-white"}
             ${
               error
                 ? "ring-2 ring-red-500"
@@ -293,7 +292,7 @@ bg-white
           </div>
 
           {/* chevron */}
-          {!disabled && <IoMdArrowDropdown size={20} aria-hidden="true" />}
+          <IoMdArrowDropdown size={20} aria-hidden="true" />
         </div>
 
         {/* dropdown */}

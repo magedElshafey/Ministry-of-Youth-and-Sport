@@ -1,15 +1,12 @@
-import { UseFormReturn } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 import MainInput from "../../common/inputs/MainInput";
-import { Step4Data } from "../schema/step4Schema";
+import { CombinedFormData } from "../schema/combinedSchema";
 
-export default function Step4({
-  methods,
-}: {
-  methods: UseFormReturn<Step4Data>;
-}) {
+export default function Step4() {
   const {
+    register,
     formState: { errors },
-  } = methods;
+  } = useFormContext<CombinedFormData>();
 
   return (
     <div className="space-y-6">
@@ -17,7 +14,7 @@ export default function Step4({
         type="date"
         placeholder="Arriving Date"
         label="Arriving Date"
-        {...methods.register("arrivingDate")}
+        {...register("arrivingDate")}
         error={errors.arrivingDate?.message}
       />
 
@@ -25,7 +22,7 @@ export default function Step4({
         label="Leaving Date"
         placeholder="Leaving Date"
         type="date"
-        {...methods.register("leavingDate")}
+        {...register("leavingDate")}
         error={errors.leavingDate?.message}
       />
     </div>

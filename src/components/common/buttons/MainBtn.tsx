@@ -12,14 +12,19 @@ const themes = {
 };
 
 const buttonVariants = cv({
-  base: "px-2 py-2 rounded font-bold",
+  base: "px-2 py-2 rounded disabled:cursor-not-allowed font-bold transition-all duration-200",
   variants: {
     theme: {
       ...themes,
     },
+    disabled: {
+      true: "opacity-50 cursor-not-allowed",
+      false: "hover:opacity-90 active:scale-95",
+    },
   },
   defaultVariants: {
     theme: "main",
+    disabled: false,
   },
 });
 
@@ -31,6 +36,7 @@ interface MainBtnProps {
   ) => Promise<string | void> | string | void;
   type?: "button" | "submit" | "reset";
   isPending?: boolean;
+  disabled?: boolean;
   bg?: string;
   className?: string;
   theme?: keyof typeof themes;
@@ -41,26 +47,28 @@ const MainBtn: React.FC<PropsWithChildren<MainBtnProps>> = ({
   onClick,
   type = "button",
   isPending = false,
+  disabled = false,
   className,
   children,
   theme,
 }) => {
   const { t } = useTranslation();
+  const isDisabled = isPending || disabled;
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if (onClick) {
+    if (onClick && !isDisabled) {
       onClick(e);
     }
   };
 
   return (
     <button
-      disabled={isPending}
+      disabled={isDisabled}
       type={type}
       onClick={handleClick}
       aria-busy={isPending}
       aria-label={isPending ? t("Submitting, please wait") : t(text || "")}
-      className={`${twMerge(buttonVariants({ theme, className }))}`}
+      className={`${twMerge(buttonVariants({ theme, disabled: isDisabled, className }))}`}
     >
       {isPending ? (
         <AiOutlineLoading3Quarters
