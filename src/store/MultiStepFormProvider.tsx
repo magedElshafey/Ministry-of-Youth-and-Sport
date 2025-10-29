@@ -1,21 +1,34 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
-import { useForm, FormProvider as HookFormProvider } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { FormStep, MultiStepFormContextType } from '../components/multi-step-form/types/FormStep';
-import { CombinedFormData, combinedFormSchema } from '../components/multi-step-form/schema/combinedSchema';
-
+import React, { createContext, useContext, useState, ReactNode } from "react";
+import { useForm, FormProvider as HookFormProvider } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  FormStep,
+  MultiStepFormContextType,
+} from "../components/multi-step-form/types/FormStep";
+import {
+  CombinedFormData,
+  combinedFormSchema,
+} from "../components/multi-step-form/schema/combinedSchema";
+import useGetSettings from "../components/multi-step-form/api/useGetSettings";
+import useSubmitForm from "../components/multi-step-form/api/useSubmitForm";
+import { toast } from "react-toastify";
+import handlePromisError from "../utils/handlePromiseError";
 interface MultiStepFormProviderProps {
   children: ReactNode;
   steps: FormStep[];
   onComplete?: (data: CombinedFormData) => void;
 }
 
-const MultiStepFormContext = createContext<MultiStepFormContextType | undefined>(undefined);
+const MultiStepFormContext = createContext<
+  MultiStepFormContextType | undefined
+>(undefined);
 
 export const useMultiStepFormContext = () => {
   const context = useContext(MultiStepFormContext);
   if (!context) {
-    throw new Error('useMultiStepFormContext must be used within MultiStepFormProvider');
+    throw new Error(
+      "useMultiStepFormContext must be used within MultiStepFormProvider"
+    );
   }
   return context;
 };
@@ -23,17 +36,25 @@ export const useMultiStepFormContext = () => {
 export const MultiStepFormProvider: React.FC<MultiStepFormProviderProps> = ({
   children,
   steps,
-  onComplete
+  onComplete,
 }) => {
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
-
+  const { data } = useGetSettings();
+  const { mutateAsync } = useSubmitForm();
+  const launchDate = data?.launch_date;
+  const endDate = data?.end_date;
   // Initialize form with combined schema
   const methods = useForm<CombinedFormData>({
-    resolver: zodResolver(combinedFormSchema),
+    resolver:
+      launchDate && endDate
+        ? zodResolver(combinedFormSchema(launchDate, endDate))
+        : undefined,
     mode: "onBlur",
-    reValidateMode: "onChange"
+    reValidateMode: "onChange",
   });
-
+  if (!launchDate || !endDate) {
+    return <p>Loading...</p>;
+  }
   const clearFormState = () => {
     methods.reset();
     setCurrentStepIndex(0);
@@ -56,14 +77,20 @@ export const MultiStepFormProvider: React.FC<MultiStepFormProviderProps> = ({
     } else {
       // Last step - submit form
       const formData = methods.getValues();
+
       try {
-        await combinedFormSchema.parseAsync(formData);
+        await combinedFormSchema(launchDate, endDate).parseAsync(formData);
+        const response = await mutateAsync(formData);
+        if (response?.status) {
+          toast?.success(response?.message);
+        }
         if (onComplete) {
           onComplete(formData);
         }
         clearFormState();
       } catch (error) {
-        console.error('Final form validation failed:', error);
+        handlePromisError(error);
+        console.error("Final form validation failed:", error);
       }
     }
     return true;
@@ -77,7 +104,6 @@ export const MultiStepFormProvider: React.FC<MultiStepFormProviderProps> = ({
     }
   };
 
-
   const contextValue: MultiStepFormContextType = {
     currentStepIndex,
     steps,
@@ -90,9 +116,7 @@ export const MultiStepFormProvider: React.FC<MultiStepFormProviderProps> = ({
 
   return (
     <MultiStepFormContext.Provider value={contextValue}>
-      <HookFormProvider {...methods}>
-        {children}
-      </HookFormProvider>
+      <HookFormProvider {...methods}>{children}</HookFormProvider>
     </MultiStepFormContext.Provider>
   );
 };

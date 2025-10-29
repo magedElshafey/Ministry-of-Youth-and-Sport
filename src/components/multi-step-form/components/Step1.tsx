@@ -59,10 +59,10 @@ export function Step1() {
       />
       <MainInput
         type="date"
-        label="ID number date"
+        label="ID number expired date"
         placeholder="enter your ID number date"
-        {...register("idNumberDate")}
-        error={errors.idNumberDate?.message}
+        {...register("idNumberExpiredDate")}
+        error={errors.idNumberExpiredDate?.message}
       />
       <MainSelect
         label="gender"

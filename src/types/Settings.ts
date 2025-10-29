@@ -19,4 +19,5 @@ export interface Settings {
   snapchat: string;
   tiktok: string;
   logo: string;
+  end_date: string;
 }

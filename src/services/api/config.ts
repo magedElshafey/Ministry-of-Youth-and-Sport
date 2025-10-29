@@ -6,4 +6,5 @@ export const apiRoutes = {
   pages: "form_pages",
   flights: "trips",
   setting: "setting",
+  visitors: "visitors",
 };

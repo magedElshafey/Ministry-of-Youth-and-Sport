@@ -16,6 +16,7 @@ export default function Step3() {
   } = useFormContext<CombinedFormData>();
   const { data, isFetching } = useGetCities();
   const { data: flights, isLoading: flightFetching } = useGetFlights(
+    2,
     watch("fromStep3"),
     watch("dateStep3")
   );
@@ -23,7 +24,9 @@ export default function Step3() {
 
   const flightsOptions = useMemo(() => {
     if (!flightFetching && flights)
-      return (flights?.id ? [{ id: flights?.id, name: flights?.trip_number }] : []) as OptionType[];
+      return (
+        flights?.id ? [{ id: flights?.id, name: flights?.trip_number }] : []
+      ) as OptionType[];
     return [];
   }, [flights, flightFetching]);
 

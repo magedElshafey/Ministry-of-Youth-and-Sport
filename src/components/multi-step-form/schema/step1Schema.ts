@@ -1,7 +1,12 @@
 import { z } from "zod";
+import { futureOrTodayDate } from "../../../utils/dateValidatin";
 
 export const step1Schema = z.object({
   fullNameArabic: z
+    .string()
+    .min(2, "validation.step1.fullName.min")
+    .max(100, "validation.step1.fullName.max"),
+  fullNameEnglish: z
     .string()
     .min(2, "validation.step1.fullName.min")
     .max(100, "validation.step1.fullName.max"),
@@ -10,8 +15,10 @@ export const step1Schema = z.object({
     .string()
     .regex(/^(05|9665)[0-9]{8}$/, "validation.step1.mobile.invalid"),
   title: z.string().min(2, "validation.step1.title.required"),
-  idNumber: z.string().regex(/^[0-9]{14}$/, "validation.step1.idNumber.invalid"),
-  idNumberDate: z.string().min(1, "validation.step1.idNumberDate.required"),
+  idNumber: z
+    .string()
+    .regex(/^[0-9]{10}$/, "validation.step1.idNumber.invalid"),
+  idNumberExpiredDate: futureOrTodayDate,
 
   gender: z
     .number({

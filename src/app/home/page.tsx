@@ -1,4 +1,4 @@
-import {MainLayoutWithContext as MainLayout} from "../../layout/MainLayout";
+import { MainLayoutWithContext as MainLayout } from "../../layout/MainLayout";
 import useGetPages from "../../components/multi-step-form/api/useGetPages";
 import { useNavigate } from "react-router-dom";
 import { CombinedFormData } from "../../components/multi-step-form/schema/combinedSchema";
@@ -12,19 +12,17 @@ export default function HomePage() {
   const navigate = useNavigate();
 
   const handleComplete = (data: CombinedFormData) => {
-    console.log(data);
-    navigate('/success');
+    navigate("/success", {
+      state: {
+        data,
+      },
+    });
   };
 
-  if(pagesQuery.isLoading) return <div>
-    loading...
-  </div>
+  if (pagesQuery.isLoading) return <div>loading...</div>;
 
   return (
-    <MultiStepFormProvider
-      steps={formSteps}
-      onComplete={handleComplete}
-    >
+    <MultiStepFormProvider steps={formSteps} onComplete={handleComplete}>
       <MainLayout>
         <FormContent />
       </MainLayout>

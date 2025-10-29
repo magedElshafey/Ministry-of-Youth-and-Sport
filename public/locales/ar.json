@@ -36,7 +36,7 @@
         "required": "الوظيفة مطلوبة"
       },
       "idNumber": {
-        "invalid": "رقم الهوية يجب أن يكون 14 رقمًا"
+        "invalid": "رقم الهوية يجب أن يكون 10 أرقاما"
       },
       "idNumberDate": {
         "required": "برجاء اختيار التاريخ"
@@ -68,6 +68,25 @@
       "leavingDate": {
         "required": "برجاء اختيار التاريخ"
       }
+    },
+    "common": {
+      "date": "لا يمكن اختيار تاريخ قبل تاريخ اليوم"
     }
-  }
+  },
+  "full name (Arabic)": "الإسم بالعربية",
+  "enter your name in Arabic": "ادخل الإسم بالعربية",
+  "full name (English)": "الإسم بالإنجليزية",
+  "enter your name in English": "ادخل الإسم بالإنجليزية",
+  "email": "البريد الإلكتروني",
+  "enter your email": "ادخل البريد الإلكتروني",
+  "mobile number": "رقم الجوال",
+  "enter your mobile number": "ادخل رقم الجوال",
+  "title / position": "المسمي الوظيفي",
+  "enter your title / position": "ادخل المسمي الوظيفي",
+  "ID number": "رقم الهوية",
+  "enter your ID number": "ادخل رقم الهوية الخاص بك",
+  "ID number expired date": "تاريخ انتهاء رقم الهوية",
+  "enter your ID number date": "ادخل تاريخ انتهاء رقم الهوية",
+  "gender": "النوع",
+  "choose your gender": "ادخل النوع"
 }

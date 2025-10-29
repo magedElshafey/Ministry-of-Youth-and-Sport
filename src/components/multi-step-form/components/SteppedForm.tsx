@@ -1,13 +1,13 @@
-import React from 'react';
-import { useMultiStepFormContext } from '../../../store/MultiStepFormProvider';
-import MainBtn from '../../common/buttons/MainBtn';
-import HtmlConverter from '../../common/htmlConverter/HtmlConverter';
-import useGetPages from '../api/useGetPages';
-import { PageType } from '../types/pages.types';
-import { useTranslation } from 'react-i18next';
+import React from "react";
+import { useMultiStepFormContext } from "../../../store/MultiStepFormProvider";
+import MainBtn from "../../common/buttons/MainBtn";
+import HtmlConverter from "../../common/htmlConverter/HtmlConverter";
+import useGetPages from "../api/useGetPages";
+import { PageType } from "../types/pages.types";
+import { useTranslation } from "react-i18next";
 
 const FormContent: React.FC = () => {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   const {
     currentStepIndex,
     steps,
@@ -18,7 +18,7 @@ const FormContent: React.FC = () => {
   } = useMultiStepFormContext();
   const currentStep = steps[currentStepIndex];
 
-  const {data} = useGetPages();
+  const { data } = useGetPages();
   const content = (data?.data?.[currentStepIndex] as PageType)?.content;
 
   const handleNext = async () => {
@@ -41,7 +41,7 @@ const FormContent: React.FC = () => {
                 onClick={handlePrevious}
                 className="bg-gray-200 hover:bg-gray-300 text-gray-800 px-5 py-2 rounded-md transition"
               >
-                {t("back")} 
+                {t("back")}
               </button>
             )}
             <MainBtn

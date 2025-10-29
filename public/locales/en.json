@@ -4,6 +4,7 @@
   "arabic": "arabic",
   "date & time": "date & time",
   "location": "location",
+  "full name (Arabic)": "full name (Arabic)",
   "step2": {
     "from": "From",
     "to": "To",
@@ -68,6 +69,22 @@
       "leavingDate": {
         "required": "Please select a date"
       }
-    }
-  }
+    },
+    "common": "A date before today's date cannot be selected."
+  },
+  "enter your name in Arabic": "enter your name in Arabic",
+  "full name (English)": "full name (English)",
+  "enter your name in English": "enter your name in English",
+  "email": "email",
+  "enter your email": "enter your email",
+  "mobile number": "mobile number",
+  "enter your mobile number": "enter your mobile number",
+  "title / position": "title / position",
+  "enter your title / position": "enter your title / position",
+  "ID number": "ID number",
+  "enter your ID number": "enter your ID number",
+  "ID number expired date": "ID number expired date",
+  "enter your ID number date": "enter your ID number date",
+  "gender": "gender",
+  "choose your gender": "choose your gender"
 }
