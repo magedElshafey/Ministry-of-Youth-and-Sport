@@ -13,7 +13,7 @@ import { Step3Data, step3Schema } from "../schema/step3Schema";
 import { step4Schema, Step4Data } from "../schema/step4Schema";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-type FormData = Step1Data & Step2Data & Step3Data & Step4Data;
+export type FormData = Step1Data & Step2Data & Step3Data & Step4Data;
 
 export default function MultiStepForm({
   onStepChange,

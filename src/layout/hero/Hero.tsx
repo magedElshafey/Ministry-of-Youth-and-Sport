@@ -38,7 +38,7 @@ const Hero: React.FC<HeroProps> = ({ Icon, title, description }) => {
         <p className="text-gray-400 w-full md:w-1/2  leading-relaxed pb-6  border-b border-b-gray-400">
           {description}
         </p>
-        <div className="mt-6 w-full md:w-1/2">
+        <div className="mt-6 w-full md:w-2/3">
           {queryResult && queryResult?.data && (
             <div className="flex flex-col md:flex-row items-center justify-between gap-5">
               <div className="flex flex-col gap-2">

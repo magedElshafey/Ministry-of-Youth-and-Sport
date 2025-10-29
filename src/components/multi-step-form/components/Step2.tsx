@@ -40,12 +40,12 @@ export default function Step2({
       <MainInput label="رقم الرحلة" value="1234" readOnly disabled />
       <MainInput label="وقت الإقلاع" value="12:00 PM" readOnly disabled />
       <MainInput label="وقت الوصول" value="3:00 PM" readOnly disabled />
-      <MainInput
+      {/* <MainInput
         label="اسم المطار"
         value="Cairo International Airport"
         readOnly
         disabled
-      />
+      /> */}
     </div>
   );
 }
