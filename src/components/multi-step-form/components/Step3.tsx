@@ -35,9 +35,9 @@ export default function Step3() {
 
   const flightInformation = useMemo(() => {
     return flights?.find(
-      (flight: FlightType) => flight?.id === watch("tripId")
+      (flight: FlightType) => flight?.id === watch("tripIdStep3")
     );
-  }, [flights, watch("tripId")]);
+  }, [flights, watch("tripIdStep3")]);
 
   return (
     <div className="space-y-6">

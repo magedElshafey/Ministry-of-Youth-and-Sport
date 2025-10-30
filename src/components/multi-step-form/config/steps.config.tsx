@@ -40,7 +40,7 @@ export const formSteps: FormStep[] = [
     id: 'hotel-info',
     title: 'معلومات الفندق',
     position: 4,
-    validationSchema: step4Schema,
+    validationSchema: step4Schema("", ""),
     component: <Step4 />,
     fields: ['arrivingDate', 'leavingDate'],
     meta: 'راجع بياناتك قبل الإرسال النهائي.',
