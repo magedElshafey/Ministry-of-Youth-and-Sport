@@ -11,3 +11,5 @@ export const combinedFormSchema = (launchDate: string, endDate: string) =>
     .merge(step4Schema(launchDate, endDate));
 
 export type CombinedFormData = z.infer<ReturnType<typeof combinedFormSchema>>;
+
+export type FormFieldKeys = keyof CombinedFormData;

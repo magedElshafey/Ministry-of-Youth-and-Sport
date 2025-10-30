@@ -1,4 +1,5 @@
 import { ZodType } from 'zod';
+import { FormFieldKeys } from '../schema/combinedSchema';
 
 export interface FormStep {
   id: string;
@@ -6,7 +7,7 @@ export interface FormStep {
   position: number;
   validationSchema: ZodType<any>;
   component: React.ReactElement;
-  fields: string[];
+  fields: FormFieldKeys[];
   meta?: string;
 }
 
