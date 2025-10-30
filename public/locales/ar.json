@@ -98,5 +98,11 @@
   "leaving flight": "رحلة المغادرة",
   "arriving date": "تاريخ الوصول",
   "leaving date": "تاريخ المغادرة",
-  "accommodation": "الإقامة"
+  "accommodation": "الإقامة",
+  "this date is already passed": "لقد مر هذا التاريخ بالفعل",
+  "your destination from": "وجهتك من",
+  "your destination to": "وجهتك الي",
+  "no data": "لا يوجد رحلات",
+  "Visitor Category": "نوع الزائر",
+  "Residence Period": "فترة الإقامة"
 }

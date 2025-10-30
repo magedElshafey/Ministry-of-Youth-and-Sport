@@ -6,6 +6,7 @@ import useGetCities from "../api/useGetCities";
 import useGetFlights from "../api/uesGetFlights";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
+import { FlightType } from "../types/Flight";
 
 export default function Step3() {
   const {
@@ -23,19 +24,26 @@ export default function Step3() {
   const { t } = useTranslation();
 
   const flightsOptions = useMemo(() => {
-    if (!flightFetching && flights)
-      return (
-        flights?.id ? [{ id: flights?.id, name: flights?.trip_number }] : []
-      ) as OptionType[];
+    if (!flightFetching && flights && flights?.length > 0) {
+      return flights.map((flight) => ({
+        id: flight.id,
+        name: flight.trip_number,
+      })) as OptionType[];
+    }
     return [];
   }, [flights, flightFetching]);
 
   const flightInformation = useMemo(() => {
-    return [flights].find((flight) => flight?.id === watch("tripIdStep3"));
-  }, [flights, watch("tripIdStep3")]);
+    return flights?.find(
+      (flight: FlightType) => flight?.id === watch("tripId")
+    );
+  }, [flights, watch("tripId")]);
 
   return (
     <div className="space-y-6">
+      <p className="font-semibold text-base lg:text-lg ">
+        {t("your destination to")}
+      </p>
       <MainSelect
         label={t("step2.to")}
         placeholder={t("step2.select_city")}

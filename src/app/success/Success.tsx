@@ -8,7 +8,7 @@ import { formatDate } from "../../utils/formatDate";
 const Success = () => {
   const { t } = useTranslation();
   const location = useLocation();
-  const data = (location?.state?.data as VisitorResponse | undefined);
+  const data = location?.state?.data as VisitorResponse | undefined;
 
   const heroData: PageType = {
     title: t("success.title"),
@@ -16,10 +16,10 @@ const Success = () => {
     image: "/assets/success.jpg",
     content: "",
     id: 0,
-    is_active: true
+    is_active: true,
   };
 
-  if(!data) return <Navigate to="/" />;
+  if (!data) return <Navigate to="/" />;
 
   return (
     <MainLayout content={heroData}>
@@ -31,7 +31,9 @@ const Success = () => {
           </p>
           <div className="flex flex-col gap-3">
             <div className="flex items-center gap-4 flex-wrap">
-              <span className="font-medium text-gray-600">{t("full name (English)")}:</span>
+              <span className="font-medium text-gray-600">
+                {t("full name (English)")}:
+              </span>
               <p className="text-slate-700">{data.name}</p>
             </div>
             <div className="flex items-center gap-4 flex-wrap">
@@ -39,24 +41,34 @@ const Success = () => {
               <p className="text-slate-700">{data.email}</p>
             </div>
             <div className="flex items-center gap-4 flex-wrap">
-              <span className="font-medium text-gray-600">{t("mobile number")}:</span>
+              <span className="font-medium text-gray-600">
+                {t("mobile number")}:
+              </span>
               <p className="text-slate-700">{data.phone}</p>
             </div>
             <div className="flex items-center gap-4 flex-wrap">
-              <span className="font-medium text-gray-600">{t("title / position")}:</span>
+              <span className="font-medium text-gray-600">
+                {t("title / position")}:
+              </span>
               <p className="text-slate-700">{data.position}</p>
             </div>
             <div className="flex items-center gap-4 flex-wrap">
-              <span className="font-medium text-gray-600">{t("ID number")}:</span>
+              <span className="font-medium text-gray-600">
+                {t("ID number")}:
+              </span>
               <p className="text-slate-700">{data.id_number}</p>
             </div>
             <div className="flex items-center gap-4 flex-wrap">
-              <span className="font-medium text-gray-600">{t("ID number expired date")}:</span>
+              <span className="font-medium text-gray-600">
+                {t("ID number expired date")}:
+              </span>
               <p className="text-slate-700">{formatDate(data.id_expiration)}</p>
             </div>
             {data.visitor_category && (
               <div className="flex items-center gap-4 flex-wrap">
-                <span className="font-medium text-gray-600">Visitor Category:</span>
+                <span className="font-medium text-gray-600">
+                  {t("Visitor Category")}:
+                </span>
                 <p className="text-slate-700">{data.visitor_category}</p>
               </div>
             )}
@@ -70,16 +82,26 @@ const Success = () => {
           </p>
           <div className="flex flex-col gap-3">
             <div className="flex items-center gap-4 flex-wrap">
-              <span className="font-medium text-gray-600">{t("arriving date")}:</span>
-              <p className="text-slate-700">{formatDate(data.residence_entry_date)}</p>
+              <span className="font-medium text-gray-600">
+                {t("arriving date")}:
+              </span>
+              <p className="text-slate-700">
+                {formatDate(data.residence_entry_date)}
+              </p>
             </div>
             <div className="flex items-center gap-4 flex-wrap">
-              <span className="font-medium text-gray-600">{t("leaving date")}:</span>
-              <p className="text-slate-700">{formatDate(data.residence_exit_date)}</p>
+              <span className="font-medium text-gray-600">
+                {t("leaving date")}:
+              </span>
+              <p className="text-slate-700">
+                {formatDate(data.residence_exit_date)}
+              </p>
             </div>
-            {data.residence_period.toString() && (
+            {data?.residence_period.toString() && (
               <div className="flex items-center gap-4 flex-wrap">
-                <span className="font-medium text-gray-600">Residence Period:</span>
+                <span className="font-medium text-gray-600">
+                  {t("Residence Period")} :
+                </span>
                 <p className="text-slate-700">{data.residence_period} days</p>
               </div>
             )}
@@ -94,37 +116,59 @@ const Success = () => {
           {data.arrival_trip && (
             <div className="flex flex-col gap-3">
               <div className="flex items-center gap-4 flex-wrap">
-                <span className="font-medium text-gray-600">{t("step2.from")}:</span>
+                <span className="font-medium text-gray-600">
+                  {t("step2.from")}:
+                </span>
                 <p className="text-slate-700">{data.arrival_trip.city}</p>
               </div>
               <div className="flex items-center gap-4 flex-wrap">
-                <span className="font-medium text-gray-600">{t("step2.date")}:</span>
+                <span className="font-medium text-gray-600">
+                  {t("step2.date")}:
+                </span>
                 <p className="text-slate-700">{data.arrival_trip.trip_date}</p>
               </div>
               <div className="flex items-center gap-4 flex-wrap">
-                <span className="font-medium text-gray-600">{t("step2.flight_number")}:</span>
-                <p className="text-slate-700">{data.arrival_trip.trip_number}</p>
+                <span className="font-medium text-gray-600">
+                  {t("step2.flight_number")}:
+                </span>
+                <p className="text-slate-700">
+                  {data.arrival_trip.trip_number}
+                </p>
               </div>
               <div className="flex items-center gap-4 flex-wrap">
-                <span className="font-medium text-gray-600">{t("step2.departure_time")}:</span>
+                <span className="font-medium text-gray-600">
+                  {t("step2.departure_time")}:
+                </span>
                 <p className="text-slate-700">{data.arrival_trip.trip_time}</p>
               </div>
               <div className="flex items-center gap-4 flex-wrap">
-                <span className="font-medium text-gray-600">{t("step2.has_stops")}:</span>
-                <p className="text-slate-700">{t(String(data.arrival_trip.has_stop ?? false))}</p>
+                <span className="font-medium text-gray-600">
+                  {t("step2.has_stops")}:
+                </span>
+                <p className="text-slate-700">
+                  {t(String(data.arrival_trip.has_stop ?? false))}
+                </p>
               </div>
               {data.arrival_trip.has_stop && (
                 <>
                   {data.arrival_trip.stop_city && (
                     <div className="flex items-center gap-4 flex-wrap">
-                      <span className="font-medium text-gray-600">{t("step2.stop_city")}:</span>
-                      <p className="text-slate-700">{data.arrival_trip.stop_city}</p>
+                      <span className="font-medium text-gray-600">
+                        {t("step2.stop_city")}:
+                      </span>
+                      <p className="text-slate-700">
+                        {data.arrival_trip.stop_city}
+                      </p>
                     </div>
                   )}
                   {data.arrival_trip.stop_time && (
                     <div className="flex items-center gap-4 flex-wrap">
-                      <span className="font-medium text-gray-600">{t("step2.stop_time")}:</span>
-                      <p className="text-slate-700">{data.arrival_trip.stop_time}</p>
+                      <span className="font-medium text-gray-600">
+                        {t("step2.stop_time")}:
+                      </span>
+                      <p className="text-slate-700">
+                        {formatDate(data.arrival_trip.stop_time)}
+                      </p>
                     </div>
                   )}
                 </>
@@ -141,37 +185,59 @@ const Success = () => {
           {data.leaving_trip && (
             <div className="flex flex-col gap-3">
               <div className="flex items-center gap-4 flex-wrap">
-                <span className="font-medium text-gray-600">{t("step2.to")}:</span>
+                <span className="font-medium text-gray-600">
+                  {t("step2.to")}:
+                </span>
                 <p className="text-slate-700">{data.leaving_trip.city}</p>
               </div>
               <div className="flex items-center gap-4 flex-wrap">
-                <span className="font-medium text-gray-600">{t("step2.date")}:</span>
+                <span className="font-medium text-gray-600">
+                  {t("step2.date")}:
+                </span>
                 <p className="text-slate-700">{data.leaving_trip.trip_date}</p>
               </div>
               <div className="flex items-center gap-4 flex-wrap">
-                <span className="font-medium text-gray-600">{t("step2.flight_number")}:</span>
-                <p className="text-slate-700">{data.leaving_trip.trip_number}</p>
+                <span className="font-medium text-gray-600">
+                  {t("step2.flight_number")}:
+                </span>
+                <p className="text-slate-700">
+                  {data.leaving_trip.trip_number}
+                </p>
               </div>
               <div className="flex items-center gap-4 flex-wrap">
-                <span className="font-medium text-gray-600">{t("step2.departure_time")}:</span>
+                <span className="font-medium text-gray-600">
+                  {t("step2.departure_time")}:
+                </span>
                 <p className="text-slate-700">{data.leaving_trip.trip_time}</p>
               </div>
               <div className="flex items-center gap-4 flex-wrap">
-                <span className="font-medium text-gray-600">{t("step2.has_stops")}:</span>
-                <p className="text-slate-700">{t(String(data.leaving_trip.has_stop ?? false))}</p>
+                <span className="font-medium text-gray-600">
+                  {t("step2.has_stops")}:
+                </span>
+                <p className="text-slate-700">
+                  {t(String(data.leaving_trip.has_stop ?? false))}
+                </p>
               </div>
               {data.leaving_trip.has_stop && (
                 <>
                   {data.leaving_trip.stop_city && (
                     <div className="flex items-center gap-4 flex-wrap">
-                      <span className="font-medium text-gray-600">{t("step2.stop_city")}:</span>
-                      <p className="text-slate-700">{data.leaving_trip.stop_city}</p>
+                      <span className="font-medium text-gray-600">
+                        {t("step2.stop_city")}:
+                      </span>
+                      <p className="text-slate-700">
+                        {data.leaving_trip.stop_city}
+                      </p>
                     </div>
                   )}
                   {data.leaving_trip.stop_time && (
                     <div className="flex items-center gap-4 flex-wrap">
-                      <span className="font-medium text-gray-600">{t("step2.stop_time")}:</span>
-                      <p className="text-slate-700">{data.leaving_trip.stop_time}</p>
+                      <span className="font-medium text-gray-600">
+                        {t("step2.stop_time")}:
+                      </span>
+                      <p className="text-slate-700">
+                        {formatDate(data.leaving_trip.stop_time)}
+                      </p>
                     </div>
                   )}
                 </>

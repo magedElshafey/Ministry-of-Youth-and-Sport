@@ -10,8 +10,7 @@ export default function Step4() {
   const { data } = useGetSettings();
   const launcDate = data?.launch_date;
   const endDate = data?.end_date;
-  console.log("launcDate", launcDate);
-  console.log("endDate", endDate);
+
   return (
     <div className="space-y-6">
       <MainInput

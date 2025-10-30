@@ -96,5 +96,11 @@
   "leaving flight": "Leaving Flight",
   "arriving date": "Arriving Date",
   "leaving date": "Leaving Date",
-  "accommodation": "Accommodation"
+  "accommodation": "Accommodation",
+  "this date is already passed": "this date is already passed",
+  "your destination from": "your destination from",
+  "no data": "no trips founded",
+  "your destination to": "your destination to",
+  "Visitor Category": "Visitor Category",
+  "Residence Period": "Residence Period"
 }

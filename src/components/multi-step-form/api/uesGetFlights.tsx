@@ -11,7 +11,7 @@ const useGetFlights = (
   return useQuery({
     queryKey: [apiRoutes.flights, city_id, date, type],
     queryFn: async () => {
-      const response = await Axios.get<{ data: FlightType }>(
+      const response = await Axios.get<{ data: FlightType[] }>(
         apiRoutes.flights,
         {
           params: {
@@ -21,7 +21,7 @@ const useGetFlights = (
           },
         }
       );
-      return response.data.data;
+      return response.data?.data;
     },
     enabled: Boolean(city_id && date && type),
   });

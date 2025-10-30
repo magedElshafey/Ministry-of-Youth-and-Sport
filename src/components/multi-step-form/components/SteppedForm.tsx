@@ -15,7 +15,7 @@ const FormContent: React.FC = () => {
     isLastStep,
     nextStep,
     previousStep,
-    isPending
+    isPending,
   } = useMultiStepFormContext();
   const currentStep = steps[currentStepIndex];
 
@@ -56,9 +56,9 @@ const FormContent: React.FC = () => {
           </div>
         </div>
 
-        <div className="w-full md:w-1/2">
+        <div className="w-full md:w-1/2 ">
           {content && (
-            <div className="text-gray-600 pt-10 text-lg/9">
+            <div className=" pt-10 text-lg/9">
               <HtmlConverter html={content} />
             </div>
           )}
