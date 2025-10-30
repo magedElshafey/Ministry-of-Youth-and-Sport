@@ -59,6 +59,7 @@ export default function Step3() {
         disabled={!(watch("dateStep3") && watch("fromStep3"))}
         options={flightsOptions}
         value={watch("tripIdStep3")}
+        loading={flightFetching}
         onChange={(id) => {
           if (id) {
             setValue("tripIdStep3", id);

@@ -19,4 +19,5 @@ export interface MultiStepFormContextType {
   nextStep: () => Promise<boolean | undefined>;
   previousStep: () => void;
   clearFormState: () => void;
+  isPending: boolean
 }

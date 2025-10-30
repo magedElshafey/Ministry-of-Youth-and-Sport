@@ -88,5 +88,15 @@
   "ID number expired date": "تاريخ انتهاء رقم الهوية",
   "enter your ID number date": "ادخل تاريخ انتهاء رقم الهوية",
   "gender": "النوع",
-  "choose your gender": "ادخل النوع"
+  "choose your gender": "ادخل النوع",
+  "success": {
+    "title": "تم الإرسال بنجاح",
+    "description": "شكراً لك على تقديمك. تم استلام معلوماتك بنجاح وسيتم معالجتها قريباً."
+  },
+  "visitor personal informations": "معلومات الزائر الشخصية",
+  "arrival flight": "رحلة الوصول",
+  "leaving flight": "رحلة المغادرة",
+  "arriving date": "تاريخ الوصول",
+  "leaving date": "تاريخ المغادرة",
+  "accommodation": "الإقامة"
 }

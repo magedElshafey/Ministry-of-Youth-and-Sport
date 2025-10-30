@@ -11,12 +11,12 @@ import {
 } from "../components/multi-step-form/schema/combinedSchema";
 import useGetSettings from "../components/multi-step-form/api/useGetSettings";
 import useSubmitForm from "../components/multi-step-form/api/useSubmitForm";
-import { toast } from "react-toastify";
 import handlePromisError from "../utils/handlePromiseError";
+import { VisitorResponse } from "../components/multi-step-form/types/VisitorResponse";
 interface MultiStepFormProviderProps {
   children: ReactNode;
   steps: FormStep[];
-  onComplete?: (data: CombinedFormData) => void;
+  onComplete?: (data: VisitorResponse) => void;
 }
 
 const MultiStepFormContext = createContext<
@@ -40,7 +40,7 @@ export const MultiStepFormProvider: React.FC<MultiStepFormProviderProps> = ({
 }) => {
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const { data } = useGetSettings();
-  const { mutateAsync } = useSubmitForm();
+  const { mutateAsync, isPending } = useSubmitForm();
   const launchDate = data?.launch_date;
   const endDate = data?.end_date;
   // Initialize form with combined schema
@@ -52,16 +52,13 @@ export const MultiStepFormProvider: React.FC<MultiStepFormProviderProps> = ({
     mode: "onBlur",
     reValidateMode: "onChange",
   });
-  if (!launchDate || !endDate) {
-    return <p>Loading...</p>;
-  }
   const clearFormState = () => {
     methods.reset();
     setCurrentStepIndex(0);
   };
 
   const validateCurrentStep = async (): Promise<boolean> => {
-    const currentStep = steps[currentStepIndex];
+    const currentStep = steps[currentStepIndex]
     if (!currentStep) return false;
     return methods.trigger(currentStep.fields);
   };
@@ -79,15 +76,14 @@ export const MultiStepFormProvider: React.FC<MultiStepFormProviderProps> = ({
       const formData = methods.getValues();
 
       try {
-        await combinedFormSchema(launchDate, endDate).parseAsync(formData);
+        await combinedFormSchema(launchDate as string, endDate as string).parseAsync(formData);
         const response = await mutateAsync(formData);
-        if (response?.status) {
-          toast?.success(response?.message);
+        if (response?.data) {
+          if (onComplete) {
+            onComplete(response.data);
+          }
+          clearFormState();
         }
-        if (onComplete) {
-          onComplete(formData);
-        }
-        clearFormState();
       } catch (error) {
         handlePromisError(error);
         console.error("Final form validation failed:", error);
@@ -112,6 +108,7 @@ export const MultiStepFormProvider: React.FC<MultiStepFormProviderProps> = ({
     nextStep,
     previousStep,
     clearFormState,
+    isPending
   };
 
   return (

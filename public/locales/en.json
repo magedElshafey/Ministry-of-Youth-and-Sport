@@ -86,5 +86,15 @@
   "ID number expired date": "ID number expired date",
   "enter your ID number date": "enter your ID number date",
   "gender": "gender",
-  "choose your gender": "choose your gender"
+  "choose your gender": "choose your gender",
+  "success": {
+    "title": "Submission Successful",
+    "description": "Thank you for your submission. Your information has been received successfully and will be processed shortly."
+  },
+  "visitor personal informations": "Visitor Personal Information",
+  "arrival flight": "Arrival Flight",
+  "leaving flight": "Leaving Flight",
+  "arriving date": "Arriving Date",
+  "leaving date": "Leaving Date",
+  "accommodation": "Accommodation"
 }

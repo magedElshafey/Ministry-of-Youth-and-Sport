@@ -71,11 +71,13 @@ const MainBtn: React.FC<PropsWithChildren<MainBtnProps>> = ({
       className={`${twMerge(buttonVariants({ theme, disabled: isDisabled, className }))}`}
     >
       {isPending ? (
-        <AiOutlineLoading3Quarters
-          className="animate-spin"
-          size={20}
-          aria-hidden="true"
-        />
+        <div className="h-full w-full flex justify-center items-center">
+          <AiOutlineLoading3Quarters
+            className="animate-spin"
+            size={20}
+            aria-hidden="true"
+          />
+        </div>
       ) : (
         children || t(text || "")
       )}

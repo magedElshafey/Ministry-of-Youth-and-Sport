@@ -308,7 +308,7 @@ const MainSelectInner = <T extends OptionType>(props: MainSelectProps<T>) => {
           >
             {loading ? (
               <div className="w-full flex justify-center py-3">
-                <Loader />
+                <Loader size={8} />
               </div>
             ) : filtered.length ? (
               filtered.map((item, idx) => {

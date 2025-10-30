@@ -5,14 +5,13 @@ import { formatDate } from "../../utils/formatDate";
 interface Props {
   title: string;
   description: string;
-  icon: string;
+  icon?: string;
   image: string
 }
 
 const Hero: React.FC<Props> = ({ title, description, icon, image }) => {
   const { t } = useTranslation();
   const queryResult = useGetSettings();
-  console.log("query from settings", queryResult?.data);
   return (
     <div
       style={{
@@ -27,7 +26,11 @@ const Hero: React.FC<Props> = ({ title, description, icon, image }) => {
     >
       <img className="absolute top-0 start-0 h-full w-full object-center object-cover" src={image} />
       <div className="absolute inset-0 flex flex-col  justify-center z-10 text-white containerr">
-        <img src={icon} width={80} className="mb-4" />
+        {
+          icon && (
+            <img src={icon} width={80} className="mb-4" />
+          )
+        }
         <h1 className="text-4xl font-bold mb-3">{title}</h1>
         <p className="text-gray-400 w-full md:w-1/2  leading-relaxed pb-6  border-b border-b-gray-400">
           {description}

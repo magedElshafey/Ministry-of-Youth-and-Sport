@@ -15,7 +15,7 @@ export const formSteps: FormStep[] = [
     position: 1,
     validationSchema: step1Schema,
     component: <Step1 />,
-    fields: ['fullName', 'email', 'mobile', 'title', 'idNumber', 'idNumberDate', 'gender'],
+    fields: ['fullName', 'email', 'mobile', 'title', 'idNumber', 'idNumberExpiredDate', 'gender'],
     meta: 'املأ بياناتك الشخصية بشكل دقيق للمتابعة.',
   },
   {

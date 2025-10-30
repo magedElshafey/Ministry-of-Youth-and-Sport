@@ -14,6 +14,6 @@ export const futureOrTodayDate = z
       return selectedDate >= today;
     },
     {
-      message: "validation.common.date",
+      error: "this date is already passed",
     }
   );

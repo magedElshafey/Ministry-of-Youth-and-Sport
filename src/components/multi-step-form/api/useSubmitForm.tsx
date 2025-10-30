@@ -2,6 +2,8 @@ import { useMutation } from "@tanstack/react-query";
 import { Axios } from "../../../services/api/Axios";
 import { apiRoutes } from "../../../services/api/config";
 import { CombinedFormData } from "../schema/combinedSchema";
+import { VisitorSubmitResponse } from "../types/VisitorResponse";
+import { useSearchParams } from "react-router-dom";
 
 const buildFormData = (formData: CombinedFormData): FormData => {
   const data = new FormData();
@@ -39,11 +41,16 @@ const buildFormData = (formData: CombinedFormData): FormData => {
 };
 
 const useSubmitForm = () => {
+  const [searchParams] = useSearchParams();
+
   return useMutation({
     mutationKey: [apiRoutes.visitors],
     mutationFn: async (formData: CombinedFormData) => {
       const payload = buildFormData(formData);
-      const { data } = await Axios.post(apiRoutes.visitors, payload);
+      
+      const { data } = await Axios.post<VisitorSubmitResponse>(apiRoutes.visitors, payload, {params: {
+        org: searchParams.get("org") || undefined
+      }});
       return data;
     },
   });

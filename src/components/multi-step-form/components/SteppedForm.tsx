@@ -15,6 +15,7 @@ const FormContent: React.FC = () => {
     isLastStep,
     nextStep,
     previousStep,
+    isPending
   } = useMultiStepFormContext();
   const currentStep = steps[currentStepIndex];
 
@@ -50,6 +51,7 @@ const FormContent: React.FC = () => {
               text={isLastStep ? "submit" : "next"}
               className="min-w-[150px]"
               onClick={handleNext}
+              isPending={isLastStep && isPending}
             />
           </div>
         </div>

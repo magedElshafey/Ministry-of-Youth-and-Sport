@@ -14,7 +14,7 @@ const Footer = () => {
   const { t } = useTranslation();
   const { data } = useGetSettings();
   return (
-    <div className="w-screen mt-4 bg-orangeColor">
+    <div className="w-screen mt-4 overflow-hidden bg-orangeColor">
       <div className="containerr">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-4 md:gap-6 lg:gap-8 xl:gap-12 text-white pt-4">
           <Logo logo={data?.logo} />

@@ -57,6 +57,7 @@ export default function Step2() {
       <MainSelect
         label={t("step2.flight_number")}
         disabled={!(watch("dateStep2") && watch("fromStep2"))}
+        loading={flightFetching}
         options={flightsOptions}
         value={watch("tripId")}
         onChange={(id) => {

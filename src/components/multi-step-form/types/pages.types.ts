@@ -5,5 +5,5 @@ export interface PageType {
   image: string;
   is_active: boolean;
   content: string;
-  icon: string;
+  icon?: string;
 }
