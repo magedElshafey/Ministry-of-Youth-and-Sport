@@ -64,10 +64,13 @@
     },
     "step4": {
       "arrivingDate": {
-        "required": "Please select a date"
+        "required": "Please select a date",
+        "withinPeriod": "Date must be within the allowed period"
       },
       "leavingDate": {
-        "required": "Please select a date"
+        "required": "Please select a date",
+        "withinPeriod": "Date must be within the allowed period",
+        "afterArriving": "Leaving date must be after arriving date"
       }
     },
     "common": "A date before today's date cannot be selected."

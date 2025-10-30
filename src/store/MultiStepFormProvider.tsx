@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, ReactNode } from "react";
 import { useForm, FormProvider as HookFormProvider } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslation } from "react-i18next";
 import {
   FormStep,
   MultiStepFormContextType,
@@ -38,6 +39,7 @@ export const MultiStepFormProvider: React.FC<MultiStepFormProviderProps> = ({
   steps,
   onComplete,
 }) => {
+  const { t } = useTranslation();
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const { data } = useGetSettings();
   const { mutateAsync, isPending } = useSubmitForm();
@@ -73,8 +75,52 @@ export const MultiStepFormProvider: React.FC<MultiStepFormProviderProps> = ({
       // Last step - submit form
       const formData = methods.getValues();
 
+      // Custom validation for step 4 dates against settings range and ordering
+      const arrivingDateStr = formData.arrivingDate as unknown as string | undefined;
+      const leavingDateStr = formData.leavingDate as unknown as string | undefined;
+      const errorsFound: string[] = [];
+
+      if (arrivingDateStr && leavingDateStr && launchDate && endDate) {
+        const arrivingDate = new Date(arrivingDateStr);
+        const leavingDate = new Date(leavingDateStr);
+        const start = new Date(launchDate);
+        const end = new Date(endDate);
+
+        // arriving within [start, end]
+        if (isNaN(arrivingDate.getTime()) || arrivingDate < start || arrivingDate > end) {
+          methods.setError("arrivingDate" as any, {
+            type: "manual",
+            message: t("validation.step4.arrivingDate.withinPeriod"),
+          });
+          errorsFound.push("arrivingDate");
+        }
+
+        // leaving within [start, end]
+        if (isNaN(leavingDate.getTime()) || leavingDate < start || leavingDate > end) {
+          methods.setError("leavingDate" as any, {
+            type: "manual",
+            message: t("validation.step4.leavingDate.withinPeriod"),
+          });
+          errorsFound.push("leavingDate");
+        }
+
+        // leaving after arriving
+        if (!isNaN(arrivingDate.getTime()) && !isNaN(leavingDate.getTime()) && leavingDate <= arrivingDate) {
+          methods.setError("leavingDate" as any, {
+            type: "manual",
+            message: t("validation.step4.leavingDate.afterArriving"),
+          });
+          errorsFound.push("leavingDate-order");
+        }
+      }
+
+      if (errorsFound.length > 0) {
+        return false;
+      }
+
       try {
         await combinedFormSchema.parseAsync(formData);
+        
         const response = await mutateAsync(formData);
         if (response?.data) {
           if (onComplete) {
