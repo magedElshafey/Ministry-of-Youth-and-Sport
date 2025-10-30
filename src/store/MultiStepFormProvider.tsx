@@ -46,9 +46,7 @@ export const MultiStepFormProvider: React.FC<MultiStepFormProviderProps> = ({
   // Initialize form with combined schema
   const methods = useForm<CombinedFormData>({
     resolver:
-      launchDate && endDate
-        ? zodResolver(combinedFormSchema(launchDate, endDate))
-        : undefined,
+      zodResolver(combinedFormSchema),
     mode: "onBlur",
     reValidateMode: "onChange",
   });
@@ -76,7 +74,7 @@ export const MultiStepFormProvider: React.FC<MultiStepFormProviderProps> = ({
       const formData = methods.getValues();
 
       try {
-        await combinedFormSchema(launchDate as string, endDate as string).parseAsync(formData);
+        await combinedFormSchema.parseAsync(formData);
         const response = await mutateAsync(formData);
         if (response?.data) {
           if (onComplete) {
